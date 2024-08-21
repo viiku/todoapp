@@ -10,7 +10,21 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Navbar';
 
 function App() {
-  const user = null;
+  const [user, setUser] = React.useState(null);
+  const [token, setToken] = React.useState(null);
+  const [error, setError] = React.useState('');
+
+  async function login(user = null){ // default user to null
+    setUser(user);
+  }
+
+  async function logout(){
+    setUser(null);
+  }
+  
+  async function signup(user = null){ // default user to null
+    setUser(user);
+  }
 
   return (
       <div className="App">
@@ -32,6 +46,49 @@ function App() {
             </Nav>
           </div>
         </Navbar>
+
+        <div className="container mt-4">
+        <Switch>
+          <Route exact path={["/", "/todos"]} render={(props) =>
+            <TodosList {...props} token={token} />
+            }>
+          </Route>
+            <Route path="/todos/create" render={(props)=>
+            <AddTodo {...props} token={token} />
+            }>
+          </Route>
+            <Route path="/todos/:id/" render={(props)=>
+            <AddTodo {...props} token={token} />
+            }>
+          </Route>
+            <Route path="/login" render={(props)=>
+            <Login {...props} login={login} />
+            }>
+          </Route>
+            <Route path="/signup" render={(props)=>
+            <Signup {...props} signup={signup} />
+            }>
+          </Route>
+        </Switch>
+      </div>
+
+      <footer className="text-center text-lg-start bg-light text-muted mt-4">
+      <div className="text-center p-4">
+        © Copyright - <a
+        target="_blank"
+        className="text-reset fw-bold text-decoration-none"
+        href="#"
+        >
+        Todo1
+        </a> - <a
+        target="_blank"
+        className="text-reset fw-bold text-decoration-none"
+        href="#"
+        >
+        Todo2
+        </a>
+        </div>
+      </footer>
       </div>
     );
 }
