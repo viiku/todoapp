@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        node-version: [18,20]
+        node-version: [20]
 
     steps:
     - uses: actions/checkout@v4
@@ -23,6 +23,7 @@ jobs:
         python-version: ${{ matrix.nopde-version }}
     - name: Install Dependencies
       run: |
+        cd frontend
         npm install
     # - name: Run Tests
     #   run: |
