@@ -75,6 +75,7 @@ def signup(request):
 @csrf_exempt
 def login(request):
     if request.method == 'POST':
+        print(request)
         data = JSONParser().parse(request)
         user = authenticate(
             request,

@@ -9,7 +9,7 @@ class TodoDataService {
 
     createTodo(data, token){
         axios.defaults.headers.common["Authorization"] = "Token " + token;
-    return axios.post("http://localhost:8000/api/todos/", data);
+        return axios.post("http://localhost:8000/api/todos/", data);
     }
 
     updateTodo(id, data, token){

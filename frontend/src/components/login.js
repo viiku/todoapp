@@ -4,9 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 const Login = props => {
-
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+
     const onChangeUsername = e => {
         const username = e.target.value;
         setUsername(username);

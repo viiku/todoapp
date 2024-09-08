@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import AddTodo from './components/add-todo';
 import TodosList from './components/todos-list';
 import Login from './components/login';
@@ -24,18 +25,32 @@ function App() {
         localStorage.setItem('user', user.username);
         setError('');
       })
-      .catch( e =>{
+      .catch(e =>{
         console.log('login', e);
         setError(e.toString());
     });
-    setUser(user);
   }
 
   async function logout(){
+    setToken('');
+    setUser('');
+    localStorage.setItem('token', '');
+    localStorage.setItem('user', '');
     setUser(null);
   }
   
   async function signup(user = null){ // default user to null
+    TodoDataService.signup(user)
+      .then(response =>{
+        setToken(response.data.token);
+        setUser(user.username);
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('user', user.username);
+      })
+      .catch( e =>{
+        console.log(e);
+        setError(e.toString());
+    }) 
     setUser(user);
   }
 
